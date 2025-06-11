@@ -1,0 +1,179 @@
+@charset "UTF-8";
+
+body {
+  background-color: #f0f8f5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: flex-start;
+  padding: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  position: relative; /* Needed for dropdown visibility */
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 calc((100% - 64px) / 5);
+  max-width: calc((100% - 64px) / 5);
+  box-sizing: border-box;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: #d5f0e3;
+  text-align: center;
+  padding-bottom: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  min-height: 280px;
+  transition: box-shadow 0.3s ease;
+  overflow: visible; /* Allow dropdown to overflow */
+  z-index: 0;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10; /* Raise card on hover to show dropdown above others */
+}
+
+.card-image {
+  width: 80%;
+  height: auto;
+  display: block;
+  margin: 6px auto 4px auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.card:hover .card-image {
+  transform: scale(1.05);
+}
+
+.card-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 10px;
+  overflow: visible; /* Allow dropdown visibility */
+}
+
+.card-title {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #1e4620;
+  margin: 4px 0 2px 0;
+  line-height: 1.2;
+}
+
+.card-subtitle {
+  font-size: 0.85em;
+  color: #3a7d44;
+  margin-bottom: 6px;
+  font-style: italic;
+  line-height: 1.2;
+  min-height: 2.4em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-price {
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #28a745;
+}
+
+.card-units,
+.card-quantity-select {
+  width: 100%;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  border: 1px solid #b0d5a5;
+  box-sizing: border-box;
+  font-size: 1em;
+  background: #f9fff9;
+  color: #2f5d27;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  appearance: none; /* Standardize appearance */
+  position: relative;
+  z-index: 20; /* Ensure dropdown is above other content */
+}
+
+.card-units:focus,
+.card-quantity-select:focus {
+  border-color: #28a745;
+  outline: none;
+}
+
+/* Hide number input arrows in Chrome/Safari */
+.card-units::-webkit-outer-spin-button,
+.card-units::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Optional: Custom arrow for select dropdown */
+.card-quantity-select {
+  background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='10' viewBox='0 0 24 24' width='10' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 10px;
+  padding-right: 30px; /* Space for arrow */
+}
+
+.card-buy-button {
+  background-color: #28a745;
+  color: white;
+  padding: 8px 0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 700;
+  font-size: 0.95em;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 4px;
+  z-index: 10;
+  position: relative;
+}
+
+.card-buy-button:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+
+@media (max-width: 1024px) {
+  .card {
+    flex: 0 0 calc((100% - 32px) / 3);
+    max-width: calc((100% - 32px) / 3);
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex: 0 0 calc((100% - 16px) / 2);
+    max-width: calc((100% - 16px) / 2);
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
