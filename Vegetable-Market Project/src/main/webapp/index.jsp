@@ -57,7 +57,7 @@
         <p>Have questions? Contact us at support@veggiemarket.com or visit our contact page. We're here to help! Our friendly customer service team is available to answer your questions, take your feedback, and ensure your shopping experience is smooth and enjoyable. Connect with us today and let us know how we can serve you better.</p>
       </div>
       <img src="${pageContext.request.contextPath}/assets/img/contact-us.avif" alt="Contact Us" class="section-image">
-    </div>
+    </div> 	
   </section>
 
   <!-- Back to Top Button -->

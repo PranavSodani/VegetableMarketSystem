@@ -3,14 +3,17 @@ package serviceImp;
 import java.util.List;
 
 import daoImpl.MainDao;
+import daoImpl.UserCartDao;
 import domain.ProductVegie;
 import domain.User;
 import service.MainInterface;
 
 public class MainDefinition implements MainInterface {
-	MainDao obj = new MainDao();
-	public boolean loginUser(String email,String password) {
-		return obj.loginUserDao(email,password);
+	MainDao obj1 = new MainDao();
+	UserCartDao obj2 = new UserCartDao();
+	
+	public User loginUser(String email,String password) {
+		return obj1.loginUserDao(email,password);
 	}
 
 	@Override
@@ -24,9 +27,17 @@ public class MainDefinition implements MainInterface {
 //		 Here check all the entries 
 		
 		
-		return obj.registerUserDao(user);
+		return obj1.registerUserDao(user);
 	}
 	public List<ProductVegie> getAllProducts(){
-		return obj.getAllProducts();
+		return obj1.getAllProducts();
 	}
+	public int getOrCreateCartId(int userId) {
+		return obj2.getOrCreateCartId(userId);
+	}
+	@Override
+	public boolean addToCart(int cartId, int productId, int quantity, int quantityPerUnit) {
+	    return obj2.addToCart(cartId, productId, quantity, quantityPerUnit);
+	}
+
 }

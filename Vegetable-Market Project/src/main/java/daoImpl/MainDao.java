@@ -35,7 +35,7 @@ public class MainDao implements UserInterface {
 		return f;
 	}
 
-	public boolean loginUserDao(String email, String password) {
+	public User loginUserDao(String email, String password) {
 	    Connection conn = null;
 	    PreparedStatement st = null;
 	    ResultSet rs = null;
@@ -47,16 +47,24 @@ public class MainDao implements UserInterface {
 	        st.setString(2, password);
 	        rs = st.executeQuery();
 	        if (rs.next()) {
-	            System.out.println("User successfully logged in");
-	            return true;
+	            int id = rs.getInt("user_id");
+	            String name = rs.getString("name");
+	            String phone = rs.getString("phone");
+	            String address = rs.getString("address");
+	            String userEmail = rs.getString("email");
+	            String userPassword = rs.getString("password");
+
+	            User user = new User(id, name, userEmail, phone, address, userPassword);
+	            System.out.println("User successfully logged in: " + userEmail);
+	            return user;
 	        } else {
 	            System.out.println("User not found or wrong credentials");
-	            return false;
+	            return null;
 	        }
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	        System.out.println("Error during login");
-	        return false;
+	        return null;
 	    } finally {
 	        try {
 	            DBConnect.closeResources(conn, rs, st);
@@ -90,4 +98,5 @@ public class MainDao implements UserInterface {
 	    }
 	    return products;
 	}
+	
 }

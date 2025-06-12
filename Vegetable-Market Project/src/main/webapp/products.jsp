@@ -8,8 +8,8 @@
 <meta charset="UTF-8">
 <title>Product Card</title>
 <script src="${pageContext.request.contextPath}/script/product-card.js"></script>
-<script
-	src="${pageContext.request.contextPath}/script/search-functionality.js"></script>
+<script src="${pageContext.request.contextPath}/script/search-functionality.js"></script>
+<script src="${pageContext.request.contextPath}/script/fetchingQuantityAndUnit.js"></script>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/component/vegetable-card.css">
 </head>
@@ -54,7 +54,7 @@
 					<option value="1000">1000gm</option>
 				</select>
 
-				<button class="card-buy-button" type="button">Add to Cart</button>
+				<a href="#" class="card-buy-button" data-product-id="<%=product.getId()%>">Add to Cart</a>
 			</div>
 		</div>
 		<%

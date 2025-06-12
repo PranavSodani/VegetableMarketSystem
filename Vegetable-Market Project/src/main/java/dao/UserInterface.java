@@ -7,6 +7,6 @@ import domain.User;
 
 public interface UserInterface {
 	boolean registerUserDao(User user);
-	boolean loginUserDao(String email,String password);
+	User loginUserDao(String email,String password);
 	List<ProductVegie> getAllProducts();
 }
