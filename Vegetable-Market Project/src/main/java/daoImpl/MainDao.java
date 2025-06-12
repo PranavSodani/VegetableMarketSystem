@@ -81,6 +81,7 @@ public class MainDao implements UserInterface {
 	            product.setDescription(rs.getString("description"));
 	            product.setImage_address(rs.getString("image_address"));
 	            product.setPrice(rs.getInt("price")); 
+	            product.setQuantity_kg(rs.getInt("quantity_kg"));
 	            products.add(product);
 	        }
 	        System.out.println("Number of products fetched: " + products.size());

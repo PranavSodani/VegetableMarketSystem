@@ -6,6 +6,7 @@ public class ProductVegie {
 	private String description;
 	private int price;
 	private String image_address;
+	private int quantity_kg;
 	
 	public ProductVegie() {}
 
@@ -47,6 +48,14 @@ public class ProductVegie {
 
 	public void setImage_address(String image_address) {
 		this.image_address = image_address;
+	}
+
+	public int getQuantity_kg() {
+		return quantity_kg;
+	}
+
+	public void setQuantity_kg(int quantity_kg) {
+		this.quantity_kg = quantity_kg;
 	}
 	
 	
