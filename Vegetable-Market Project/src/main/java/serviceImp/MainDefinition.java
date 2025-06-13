@@ -5,6 +5,7 @@ import java.util.List;
 import daoImpl.MainDao;
 import daoImpl.UserCartDao;
 import domain.CartItem;
+import domain.CartItemWithProduct;
 import domain.ProductVegie;
 import domain.User;
 import service.MainInterface;
@@ -43,5 +44,8 @@ public class MainDefinition implements MainInterface {
 	public List<CartItem> getCartItems(int cartId){
 		return obj2.getCartItems(cartId);
 	}
-	
+	public List<CartItemWithProduct> getCartItemsWithDetails(int cartId){
+	    return obj2.getCartItemsWithProductDetails(cartId);
+	}
+
 }

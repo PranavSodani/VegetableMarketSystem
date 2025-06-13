@@ -1,53 +1,86 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="domain.CartItemWithProduct" %>
+<%@ include file="component/navbar.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Your Cart</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/component/vegetable-card.css">
 <style>
-    body { font-family: Arial, sans-serif; }
-    table { width: 80%; margin: 20px auto; border-collapse: collapse; }
-    th, td { padding: 10px; text-align: center; border: 1px solid #ccc; }
-    th { background-color: #f2f2f2; }
+    .back-button {
+        display: inline-block;
+        margin: 20px auto;
+        padding: 10px 25px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 1em;
+        cursor: pointer;
+        text-align: center;
+    }
+    .empty-message {
+        text-align: center;
+        font-style: italic;
+        color: #777;
+        margin-top: 50px;
+        font-size: 1.2em;
+    }
+    .remove-button {
+        background: #ff4d4d;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 16px;
+        cursor: pointer;
+        margin-top: 10px;
+        width: 100%;
+        font-weight: bold;
+    }
 </style>
 </head>
 <body>
-    <h1>Your Cart</h1>
-    <table>
-        <tr>
-            <th>Item ID</th>
-            <th>Product ID</th>
-            <th>Quantity</th>
-            <th>Quantity Per Unit</th>
-        </tr>
+
+    <div style="margin: 20px; text-align: center;">
+        <a href="products.jsp" class="back-button">← Back to Products</a>
+    </div>
+
+    <h1 style="text-align:center;">Your Cart</h1>
+
+    <%
+        java.util.List<CartItemWithProduct> cartItems = (java.util.List<CartItemWithProduct>) request.getAttribute("cartItems");
+        if (cartItems != null && !cartItems.isEmpty()) {
+    %>
+    <div class="container-flex">
         <%
-            // Retrieve cartItems list from request attribute
-            java.util.List cartItems = (java.util.List) request.getAttribute("cartItems");
-        	if(cartItems == null)
-        		System.out.println("your cart is currently empty");
-        	else
-        		System.out.println("your cart is not empty");
-            if (cartItems != null && !cartItems.isEmpty()) {
-                for (Object obj : cartItems) {
-                    domain.CartItem item = (domain.CartItem) obj;
+            for (CartItemWithProduct item : cartItems) {
         %>
-        <tr>
-            <td><%= item.getItemId() %></td>
-            <td><%= item.getProductId() %></td>
-            <td><%= item.getQuantity() %></td>
-            <td><%= item.getQuantityPerUnit() %></td>
-        </tr>
-        <%
-                }
-            } else {
-        %>
-        <tr>
-            <td colspan="4">Your cart is empty.</td>
-        </tr>
+        <div class="card">
+            <img src="<%= item.getImageAddress() %>" alt="<%= item.getProductName() %>" class="card-image">
+            <div class="card-content">
+                <p class="card-title"><%= item.getProductName() %></p>
+                <p class="card-subtitle"><%= item.getProductDescription() %></p>
+                <p class="card-price">&#8377;<%= item.getPrice() %></p>
+                <p class="card-subtitle">Quantity: <%= item.getQuantity() %></p>
+                <p class="card-subtitle">Quantity Per Unit: <%= item.getQuantityPerUnit() %> gm</p>
+                <form action="removeFromCart" method="post" style="margin-top: 10px;">
+                    <input type="hidden" name="itemId" value="<%= item.getItemId() %>">
+                    <button type="submit" class="remove-button">Remove</button>
+                </form>
+            </div>
+        </div>
         <%
             }
         %>
-    </table>
+    </div>
+    <%
+        } else {
+    %>
+    <div class="empty-message">Your cart is empty.</div>
+    <%
+        }
+    %>
 </body>
 </html>

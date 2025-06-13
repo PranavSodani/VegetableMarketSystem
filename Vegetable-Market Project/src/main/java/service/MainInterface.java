@@ -3,6 +3,7 @@ package service;
 import java.util.List;
 
 import domain.CartItem;
+import domain.CartItemWithProduct;
 import domain.ProductVegie;
 import domain.User;
 
@@ -17,5 +18,6 @@ public interface MainInterface {
 	public int getOrCreateCartId(int userId);
 	boolean addToCart(int cartId, int productId, int quantity, int quantityPerUnit);
 	List<CartItem> getCartItems(int cartId);
+	List<CartItemWithProduct> getCartItemsWithDetails(int cartId);
 }
 	
