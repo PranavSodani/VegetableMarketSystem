@@ -10,8 +10,7 @@
 <script src="${pageContext.request.contextPath}/script/product-card.js"></script>
 <script src="${pageContext.request.contextPath}/script/search-functionality.js"></script>
 <script src="${pageContext.request.contextPath}/script/fetchingQuantityAndUnit.js"></script>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/component/vegetable-card.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/component/vegetable-card.css">
 </head>
 <body>
 	<%@ include file="component/navbar.jsp"%>

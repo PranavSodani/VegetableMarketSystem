@@ -18,7 +18,7 @@ public class AddToCartServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String productIdStr = req.getParameter("product_id");
 		String quantityStr = req.getParameter("quantity");
-		String unitStr = req.getParameter("unit");
+		String unitStr = req.getParameter("quantity_per_unit");
 
 //		System.out.println("Your Js is working fine here " + productId+" "+quantity+" "+unit);
 		
@@ -37,9 +37,10 @@ public class AddToCartServlet extends HttpServlet{
 		    return;
 		}
 		else {
-			// Inside your AddToCartServlet.doGet
+			System.out.println("Ok you are getting till here");
 			MainDefinition mainService = new MainDefinition();
 			int cartId = mainService.getOrCreateCartId(userId);
+			System.out.println("cartId : "+cartId);
 			boolean added = mainService.addToCart(cartId, productId, quantity, unit);
 			if (added) {
 			    resp.sendRedirect("products.jsp");

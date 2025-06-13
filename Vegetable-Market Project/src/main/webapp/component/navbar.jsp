@@ -63,9 +63,7 @@
 			%>
 			<!-- Cart button (optional) -->
 			<div class="ml-2">
-				<a class="btn btn-warning text-dark" href="cart.jsp"> <i
-					class="fas fa-shopping-cart"></i> Cart
-				</a>
+				<a class="btn btn-warning text-dark" href="viewCart"> <i class="fas fa-shopping-cart"></i> Cart </a>
 			</div>
 			<%
 			}

@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // 2. Use a relative path if your app is at the root.
 
       // Example using a relative path (if your app is at root):
-      const url = `addToCart?product_id=${productId}&quantity=${quantity}&unit=${unit}`;
+      const url = `addToCart?product_id=${productId}&quantity=${quantity}&quantity_per_unit=${unit}`;
 
       // Or, if you set a JS variable in your JSP:
       // const url = `${contextPath}/addToCart?product_id=${productId}&quantity=${quantity}&unit=${unit}`;

@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import dao.UserCartInterface;
+import domain.CartItem;
 import util.DBConnect;
 
 public class UserCartDao implements UserCartInterface{
@@ -69,6 +72,45 @@ public class UserCartDao implements UserCartInterface{
 	            e.printStackTrace();
 	        }
 	    }
+	}
+	public List<CartItem> getCartItems(int cartId){
+		Connection conn = null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		List<CartItem> cartItems = new ArrayList<>();
+		try {
+			conn = DBConnect.getConn();
+			String sql = "select * from cart_items where cart_id=?";
+			st = conn.prepareStatement(sql);
+			st.setInt(1,cartId);
+			rs = st.executeQuery();
+			while(rs.next()) {
+				System.out.println("here");
+				CartItem item = new CartItem(
+				rs.getInt("item_id"),
+				rs.getInt("cart_id"),
+				rs.getInt("product_id"),
+				rs.getInt("quantity"),
+				rs.getInt("quantity_per_unit")		
+				);
+				cartItems.add(item);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				DBConnect.closeResources(conn, rs, st);
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if(cartItems != null)
+		System.out.println("Size of my cart is "+cartItems.size());
+		return cartItems;
+		
 	}
 
 }
