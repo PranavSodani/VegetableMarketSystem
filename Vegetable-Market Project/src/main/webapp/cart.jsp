@@ -7,39 +7,7 @@
 <meta charset="UTF-8">
 <title>Your Cart</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/component/vegetable-card.css">
-<style>
-    .back-button {
-        display: inline-block;
-        margin: 20px auto;
-        padding: 10px 25px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        text-decoration: none;
-        font-size: 1em;
-        cursor: pointer;
-        text-align: center;
-    }
-    .empty-message {
-        text-align: center;
-        font-style: italic;
-        color: #777;
-        margin-top: 50px;
-        font-size: 1.2em;
-    }
-    .remove-button {
-        background: #ff4d4d;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        padding: 8px 16px;
-        cursor: pointer;
-        margin-top: 10px;
-        width: 100%;
-        font-weight: bold;
-    }
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/component/cart-card.css">
 </head>
 <body>
 
