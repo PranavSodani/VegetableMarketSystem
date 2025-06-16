@@ -14,33 +14,8 @@
 <script src="${pageContext.request.contextPath}/script/cardNotification.js"></script>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/component/vegetable-card.css">
-<style>
-.cart-notification {
-  position: fixed;
-  top: 70px; /* Place below navbar (navbar height + some margin) */
-  left: 50%;
-  transform: translateX(-50%);
-  background: #4CAF50;
-  color: white;
-  padding: 20px 40px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  font-weight: bold;
-  opacity: 0;
-  transition: opacity 0.5s, transform 0.5s;
-  z-index: 1000; /* Higher than navbar */
-  pointer-events: none;
-  font-size: 1rem;
-  min-height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.cart-notification.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/component/cart-card.css">
+
 </head>
 <body>
     <%@ include file="component/navbar.jsp"%>

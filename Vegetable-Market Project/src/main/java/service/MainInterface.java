@@ -19,5 +19,6 @@ public interface MainInterface {
 	boolean addToCart(int cartId, int productId, int quantity, int quantityPerUnit);
 	List<CartItem> getCartItems(int cartId);
 	List<CartItemWithProduct> getCartItemsWithDetails(int cartId);
+	boolean deleteCartByItemId(int itemId);
 }
 	

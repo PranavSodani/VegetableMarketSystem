@@ -48,4 +48,10 @@ public class MainDefinition implements MainInterface {
 	    return obj2.getCartItemsWithProductDetails(cartId);
 	}
 
+	@Override
+	public boolean deleteCartByItemId(int itemId) {
+		return obj2.deleteCartByItemId(itemId);
+	}
+	
+
 }

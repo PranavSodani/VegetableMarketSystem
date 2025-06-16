@@ -155,5 +155,34 @@ public class UserCartDao implements UserCartInterface{
 	    return items;
 	}
 
+	@Override
+	public boolean deleteCartByItemId(int itemId) {
+		Connection conn = null;
+		PreparedStatement st = null;
+		try {
+			conn = DBConnect.getConn();
+			String sql = "Delete from cart_items where item_id = ?";
+			st = conn.prepareStatement(sql);
+			st.setInt(1, itemId);
+			int i = st.executeUpdate();
+			if(i == 1)
+				return true;
+			else
+				return false;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			try {
+				DBConnect.closeResources(conn, null, st);
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+	}
+
 
 }
