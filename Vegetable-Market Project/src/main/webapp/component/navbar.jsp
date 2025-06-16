@@ -32,9 +32,9 @@
 					<li class="nav-item"><a class="nav-link text-white"
 						href="${pageContext.request.contextPath}/products">Products</a></li>
 					<li class="nav-item"><a class="nav-link text-white"
-						href="#about">About</a></li>
+						href="${pageContext.request.contextPath}/index.jsp#about">About</a></li>
 					<li class="nav-item"><a class="nav-link text-white"
-						href="#contact">Contact</a></li>
+						href="${pageContext.request.contextPath}/index.jsp#contact">Contact</a></li>
 				</ul>
 			</div>
 

@@ -20,7 +20,6 @@ public class UpdateCartQuantityServlet extends HttpServlet {
             try {
                 int itemId = Integer.parseInt(itemIdStr);
                 MainDefinition mainService = new MainDefinition();
-                // Call the service to decrease the quantity (or remove if quantity is 1)
                 mainService.decreaseQuantity(itemId);
                 resp.sendRedirect(req.getContextPath() + "/viewCart");
             } catch (Exception e) {

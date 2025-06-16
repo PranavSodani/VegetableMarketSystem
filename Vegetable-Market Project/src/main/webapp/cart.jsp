@@ -32,7 +32,7 @@
             <div class="card-content">
                 <p class="card-title"><%= item.getProductName() %></p>
                 <p class="card-subtitle"><%= item.getProductDescription() %></p>
-                <p class="card-price">&#8377;<%= item.getPrice() %></p>
+                <p class="card-price">&#8377;<%= item.getTotalPrice() %></p>
                 <p class="card-subtitle">Quantity: <%= quantity %></p>
                 <p class="card-subtitle">Quantity Per Unit: <%= item.getQuantityPerUnit() %> gm</p>
 
@@ -41,7 +41,7 @@
                         if (quantity > 1) {
                     %>
                     <!-- Reduce Quantity Form -->
-                    <form action="updateCartQuantity" method="post" style="display:inline-block;">
+                    <form action="updateCartQuantity" method="post">
                         <input type="hidden" name="itemId" value="<%= item.getItemId() %>">
                         <input type="hidden" name="action" value="decrease">
                         <button type="submit" class="reduce-button">Reduce Quantity</button>
@@ -51,7 +51,7 @@
                     %>
 
                     <!-- Remove Button Form (always shown) -->
-                    <form action="removeFromCart" method="post" style="display:inline-block;">
+                    <form action="removeFromCart" method="post">
                         <input type="hidden" name="itemId" value="<%= item.getItemId() %>">
                         <button type="submit" class="remove-button">Remove</button>
                     </form>

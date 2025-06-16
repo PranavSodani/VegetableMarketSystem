@@ -5,7 +5,7 @@ public class CartItemWithProduct extends CartItem {
 	private String productDescription;
 	private String imageAddress;
 	private int price;
-
+	private int totalPrice;
 	public CartItemWithProduct() {
 	}
 
@@ -49,5 +49,13 @@ public class CartItemWithProduct extends CartItem {
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 }

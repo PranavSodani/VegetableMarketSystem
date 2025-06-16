@@ -139,44 +139,36 @@ public class UserCartDao implements UserCartInterface{
 	}
 	
 	public List<CartItemWithProduct> getCartItemsWithProductDetails(int cartId) {
-	    List<CartItemWithProduct> items = new ArrayList<>();
-	    Connection conn = null;
-	    PreparedStatement st = null;
-	    ResultSet rs = null;
-	    try {
-	        conn = DBConnect.getConn();
-	        String sql = "SELECT ci.item_id, ci.cart_id, ci.product_id, ci.quantity, ci.quantity_per_unit, " +
-	                     "p.name, p.description, p.image_address, p.price " +
-	                     "FROM cart_items ci " +
-	                     "JOIN products_vegies p ON ci.product_id = p.id " +
-	                     "WHERE ci.cart_id = ?";
-	        st = conn.prepareStatement(sql);
-	        st.setInt(1, cartId);
-	        rs = st.executeQuery();
-	        while (rs.next()) {
-	            CartItemWithProduct item = new CartItemWithProduct(
-	                rs.getInt("item_id"),
-	                rs.getInt("cart_id"),
-	                rs.getInt("product_id"),
-	                rs.getInt("quantity"),
-	                rs.getInt("quantity_per_unit"),
-	                rs.getString("name"),
-	                rs.getString("description"),
-	                rs.getString("image_address"),
-	                rs.getInt("price")  // or double if you changed price type
-	            );
-	            items.add(item);
+		List<CartItemWithProduct> list = new ArrayList<>();
+	    String sql = "SELECT ci.item_id, ci.cart_id, ci.product_id, ci.quantity, ci.quantity_per_unit, " +
+	                 "p.name AS product_name, p.description, p.price AS unit_price, p.image_address, " +
+	                 "ROUND((ci.quantity * ci.quantity_per_unit * p.price) / 100) AS total_price " +
+	                 "FROM cart_items ci " +
+	                 "JOIN products_vegies p ON ci.product_id = p.id " +
+	                 "WHERE ci.cart_id = ?";
+	    try (Connection conn = DBConnect.getConn();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+	        ps.setInt(1, cartId);
+	        try (ResultSet rs = ps.executeQuery()) {
+	            while (rs.next()) {
+	                CartItemWithProduct item = new CartItemWithProduct();
+	                item.setItemId(rs.getInt("item_id"));
+	                item.setCartId(rs.getInt("cart_id"));
+	                item.setProductId(rs.getInt("product_id"));
+	                item.setQuantity(rs.getInt("quantity"));
+	                item.setQuantityPerUnit(rs.getInt("quantity_per_unit"));
+	                item.setProductName(rs.getString("product_name"));
+	                item.setProductDescription(rs.getString("description"));
+	                item.setImageAddress(rs.getString("image_address"));
+	                item.setPrice(rs.getInt("unit_price"));
+	                item.setTotalPrice(rs.getInt("total_price"));  // Set calculated total price
+	                list.add(item);
+	            }
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
-	    } finally {
-	        try {
-	            DBConnect.closeResources(conn, rs, st);
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
 	    }
-	    return items;
+	    return list;
 	}
 
 	@Override
