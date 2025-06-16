@@ -20,5 +20,6 @@ public interface MainInterface {
 	List<CartItem> getCartItems(int cartId);
 	List<CartItemWithProduct> getCartItemsWithDetails(int cartId);
 	boolean deleteCartByItemId(int itemId);
+	boolean decreaseQuantity(int itemId);
 }
 	

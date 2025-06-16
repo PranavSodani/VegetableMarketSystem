@@ -53,27 +53,51 @@ public class UserCartDao implements UserCartInterface{
 	public boolean addToCart(int cartId, int productId, int quantity, int quantityPerUnit) {
 	    Connection conn = null;
 	    PreparedStatement st = null;
+	    PreparedStatement updateSt = null;
+	    ResultSet rs = null;
 	    try {
 	        conn = DBConnect.getConn();
-	        String sql = "INSERT INTO cart_items (cart_id, product_id, quantity, quantity_per_unit) VALUES (?, ?, ?, ?)";
-	        st = conn.prepareStatement(sql);
+	        String checkSql = "SELECT item_id, quantity FROM cart_items WHERE cart_id = ? AND product_id = ? AND quantity_per_unit = ?";
+	        st = conn.prepareStatement(checkSql);
 	        st.setInt(1, cartId);
 	        st.setInt(2, productId);
-	        st.setInt(3, quantity);
-	        st.setInt(4, quantityPerUnit);
-	        int rowsAffected = st.executeUpdate();
-	        return rowsAffected > 0;
+	        st.setInt(3, quantityPerUnit);
+	        rs = st.executeQuery();
+	        if (rs.next()) {
+	            int existingQuantity = rs.getInt("quantity");
+	            int newQuantity = existingQuantity + quantity;
+	            int itemId = rs.getInt("item_id");
+	            String updateSql = "UPDATE cart_items SET quantity = ? WHERE item_id = ?";
+	            updateSt = conn.prepareStatement(updateSql);
+	            updateSt.setInt(1, newQuantity);
+	            updateSt.setInt(2, itemId);
+	            int rowsAffected = updateSt.executeUpdate();
+	            return rowsAffected > 0;
+	        } else {
+	            String insertSql = "INSERT INTO cart_items (cart_id, product_id, quantity, quantity_per_unit) VALUES (?, ?, ?, ?)";
+	            updateSt = conn.prepareStatement(insertSql);
+	            updateSt.setInt(1, cartId);
+	            updateSt.setInt(2, productId);
+	            updateSt.setInt(3, quantity);
+	            updateSt.setInt(4, quantityPerUnit);
+	            int rowsAffected = updateSt.executeUpdate();
+	            return rowsAffected > 0;
+	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	        return false;
 	    } finally {
 	        try {
-	            DBConnect.closeResources(conn, null, st);
+	            DBConnect.closeResources(conn, rs, st);
+	            if (updateSt != null) {
+	                updateSt.close();
+	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
 	    }
 	}
+
 	public List<CartItem> getCartItems(int cartId){
 		Connection conn = null;
 		PreparedStatement st = null;
@@ -182,6 +206,55 @@ public class UserCartDao implements UserCartInterface{
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public boolean decreaseQuantity(int itemId) {
+	    Connection conn = null;
+	    PreparedStatement stSelect = null;
+	    PreparedStatement stUpdate = null;
+	    PreparedStatement stDelete = null;
+	    ResultSet rs = null;
+	    try {
+	        conn = DBConnect.getConn();
+
+	        // 1. Get current quantity
+	        String selectSql = "SELECT quantity FROM cart_items WHERE item_id = ?";
+	        stSelect = conn.prepareStatement(selectSql);
+	        stSelect.setInt(1, itemId);
+	        rs = stSelect.executeQuery();
+
+	        if (rs.next()) {
+	            int currentQuantity = rs.getInt("quantity");
+	            if (currentQuantity > 1) {
+	                // 2. Update quantity = quantity - 1
+	                String updateSql = "UPDATE cart_items SET quantity = ? WHERE item_id = ?";
+	                stUpdate = conn.prepareStatement(updateSql);
+	                stUpdate.setInt(1, currentQuantity - 1);
+	                stUpdate.setInt(2, itemId);
+	                int rows = stUpdate.executeUpdate();
+	                return rows > 0;
+	            } else {
+	                // 3. Quantity is 1, so remove the item
+	                String deleteSql = "DELETE FROM cart_items WHERE item_id = ?";
+	                stDelete = conn.prepareStatement(deleteSql);
+	                stDelete.setInt(1, itemId);
+	                int rows = stDelete.executeUpdate();
+	                return rows > 0;
+	            }
+	        }
+	        return false; // Item not found
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    } finally {
+	        try {
+	            DBConnect.closeResources(conn, rs, stSelect);
+	            if (stUpdate != null) stUpdate.close();
+	            if (stDelete != null) stDelete.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
 	}
 
 

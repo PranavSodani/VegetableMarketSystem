@@ -27,7 +27,5 @@ public class ProductVegieServlet extends HttpServlet {
 	    HttpSession session = req.getSession();
 	    session.setAttribute("products", products);
 	    req.getRequestDispatcher("/products.jsp").forward(req, resp);
-	}
-
-	
+	}	
 }

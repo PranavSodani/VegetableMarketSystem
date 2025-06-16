@@ -47,6 +47,11 @@
 			<location>C:/Users/PRANAV/Desktop/about-us.jfif</location>
 		</link>
 		<link>
+			<name>src/main/webapp/assets/img/cart-is-empty.png</name>
+			<type>1</type>
+			<location>C:/Users/PRANAV/Desktop/cart-is-empty.png</location>
+		</link>
+		<link>
 			<name>src/main/webapp/assets/img/contact-us.avif</name>
 			<type>1</type>
 			<location>C:/Users/PRANAV/Desktop/contact-us.avif</location>

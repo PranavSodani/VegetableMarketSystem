@@ -55,3 +55,43 @@
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
+.empty-cart-container {
+    text-align: center;
+    margin: 60px auto;
+}
+.empty-cart-container img {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+.empty-cart-message {
+    font-size: 1.25rem;
+    color: #555;
+    font-style: italic;
+}
+.reduce-button {
+    background-color: #f0ad4e; /* orange */
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+.remove-button {
+    background-color: #d9534f; /* red */
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.button-group {
+    margin-top: 10px;
+}
+.button-group form {
+    display: inline-block;
+    margin-right: 5px; /* Reduce this value to make the gap smaller */
+    margin-right: 2px;
+}
