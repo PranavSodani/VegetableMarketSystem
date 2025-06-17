@@ -2,6 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ page import="domain.ProductVegie"%>
 <%@ page import="java.util.List"%>
+<%
+    // Session check to restrict access to logged-in users only
+    Integer userId = (Integer) session.getAttribute("user_id");
+    if (userId == null || userId == 0) {
+        response.sendRedirect("login.jsp");
+        return; // Stop further processing
+    }
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,7 +65,8 @@
                     <option value="1000">1000gm</option>
                 </select>
 
-                <a href="#" class="card-buy-button" data-product-id="<%=product.getId()%>">Add to Cart</a>
+                <button type="button" class="card-buy-button" data-product-id="<%=product.getId()%>">Add to Cart</button>
+
             </div>
         </div>
         <%
@@ -80,6 +89,7 @@
     <div id="cart-notification" class="cart-notification">
         <span>Your item has been added to the cart successfully!</span>
     </div>
-
+    
+    
 </body>
 </html>
