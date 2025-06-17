@@ -12,22 +12,24 @@ import serviceImp.MainDefinition;
 @WebServlet("/removeFromCart")
 public class RemoveFromCartServlet extends HttpServlet {
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String itemIdStr = req.getParameter("itemId");
-        if (itemIdStr != null) {
-            try {
-                int itemId = Integer.parseInt(itemIdStr);
-                MainDefinition obj = new MainDefinition();
-                boolean isDeleted = obj.deleteCartByItemId(itemId);
-                if (!isDeleted) {
-                    System.out.println("Unable to delete from cart");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        resp.sendRedirect(req.getContextPath() + "/viewCart");
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	    String itemIdStr = req.getParameter("itemId");
+	    if (itemIdStr != null) {
+	        try {
+	            int itemId = Integer.parseInt(itemIdStr);
+	            MainDefinition obj = new MainDefinition();
+	            boolean isDeleted = obj.deleteCartByItemId(itemId);
+	            // Set notification in session
+	            req.getSession().setAttribute("notification", "Item removed from cart!");
+	            if (!isDeleted) {
+	                System.out.println("Unable to delete from cart");
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    resp.sendRedirect(req.getContextPath() + "/viewCart");
+	}
 
-    }
 }

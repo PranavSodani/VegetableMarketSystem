@@ -26,7 +26,7 @@
       <div class="form-group">
         <label for="password">Password</label>
         <input type="password" class="form-control" id="password" name="password" required>
-      </div>
+      </div>	
       <button type="submit" class="btn login-btn btn-block">Login</button>
       <div class="mt-3 text-center">
         <a href="forgot-password.jsp" class="forgot-password">Forgot Password?</a>
