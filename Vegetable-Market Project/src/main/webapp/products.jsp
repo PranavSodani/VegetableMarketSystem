@@ -2,14 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="domain.ProductVegie"%>
 <%@ page import="java.util.List"%>
-<%
-    // Session check to restrict access to logged-in users only
-    Integer userId = (Integer) session.getAttribute("user_id");
-    if (userId == null || userId == 0) {
-        response.sendRedirect("login.jsp");
-        return; // Stop further processing
-    }
-%>
+
 <!DOCTYPE html>
 <html>
 <head>

@@ -1,14 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="domain.CartItemWithProduct" %>
 <%@ include file="component/navbar.jsp" %>
-<%
-    // Session check to restrict access to logged-in users only
-    Integer userId = (Integer) session.getAttribute("user_id");
-    if (userId == null || userId == 0) {
-        response.sendRedirect("login.jsp");
-        return; // Stop further processing
-    }
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
