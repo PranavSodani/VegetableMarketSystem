@@ -37,7 +37,6 @@
     }
 %>
 
-
 <h1 style="text-align:center;">Your Cart</h1>
 
 <%
@@ -94,10 +93,88 @@
 <%
     }
 %>
+
 <div style="margin: 20px; text-align: center;">
     <a href="${pageContext.request.contextPath}/products" class="back-button">← Back to Products</a>
 </div>
 
+<div style="text-align: center; margin: 20px;">
+  <button id="show-summary-btn" class="btn" style="padding: 10px 20px; background-color:#4CAF50; color:white; border:none; border-radius:5px; cursor:pointer;">
+    Show Summary
+  </button>
+</div>
+
+<!-- Order Summary Modal -->
+<div id="summary-modal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
+    background: rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index: 3000;">
+  <div style="background:#fff; padding:20px; border-radius:8px; max-width:500px; width:90%; max-height:80vh; overflow-y:auto;">
+    <h2>Order Summary</h2>
+    <ul style="list-style:none; padding:0;">
+      <%-- Loop through cart items and display name & quantity --%>
+      <%
+        if (cartItems != null) {
+          for (CartItemWithProduct item : cartItems) {
+      %>
+        <li style="margin-bottom:10px;">
+          <strong><%= item.getProductName() %></strong> — Quantity: <%= item.getQuantity() %> — Price: &#8377;<%= item.getTotalPrice() %>
+        </li>
+      <%
+          }
+        }
+      %>
+    </ul>
+
+    <%-- Calculate totals --%>
+    <%
+      double subtotal = 0;
+      if (cartItems != null) {
+          for (CartItemWithProduct item : cartItems) {
+              subtotal += item.getTotalPrice();
+          }
+      }
+      double taxRate = 0.05; // 5% tax example
+      double taxAmount = subtotal * taxRate;
+      double grandTotal = subtotal + taxAmount;
+    %>
+
+    <p><strong>Subtotal:</strong> &#8377; <%= String.format("%.2f", subtotal) %></p>
+    <p><strong>Tax (5%):</strong> &#8377; <%= String.format("%.2f", taxAmount) %></p>
+    <hr>
+    <p style="font-weight:bold;"><strong>Grand Total:</strong> &#8377; <%= String.format("%.2f", grandTotal) %></p>
+
+    <div style="margin-top:20px; text-align:center;">
+      <a href="billing.jsp" class="btn" style="padding:10px 20px; background:#007bff; color:#fff; border:none; border-radius:5px; cursor:pointer; text-decoration:none;">
+        Proceed to Billing
+      </a>
+      <button id="close-summary-btn" style="padding:10px 20px; margin-left:10px; border:none; border-radius:5px; cursor:pointer;">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const showBtn = document.getElementById('show-summary-btn');
+  const modal = document.getElementById('summary-modal');
+  const closeBtn = document.getElementById('close-summary-btn');
+
+  showBtn.addEventListener('click', function() {
+    modal.style.display = 'flex';
+  });
+
+  closeBtn.addEventListener('click', function() {
+    modal.style.display = 'none';
+  });
+
+  // Optional: close modal if clicking outside content
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+});
+</script>
 
 </body>
 </html>

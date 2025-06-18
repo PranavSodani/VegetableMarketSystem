@@ -7,13 +7,11 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   min-height: 100vh;
-  display: flex;
-  align-items: flex-start;      /* Align to top for safety with tall forms */
-  justify-content: center;
-  padding: 60px 0 40px;         /* Top, sides, and bottom padding */
+  padding: 0 0 40px;  /* Removed top padding */
   margin: 0;
-  overflow-y: auto;             /* Enable vertical scroll if needed */
+  overflow-y: auto;
 }
+
 
 /* Ensures html tag also allows scrolling if form is very tall */
 html, body {
