@@ -17,7 +17,7 @@ public class MainDao implements UserInterface {
 		boolean f = false;
 		try {	
 			Connection conn = DBConnect.getConn();
-			String sql= "insert into users(name,email,phone,address,password) values (?,?,?,?,?)";
+			String sql= "insert into users(name,email,phone,address,password,user_type) values (?,?,?,?,?,?)";
 			PreparedStatement st = conn.prepareStatement(sql);
 			System.out.println(user.getName());
 			st.setString(1,user.getName());
@@ -25,6 +25,7 @@ public class MainDao implements UserInterface {
 			st.setString(3, user.getPhone());
 			st.setString(4, user.getAddress());
 			st.setString(5, user.getPassword());
+			st.setString(6, user.getUserType());
 			int i = st.executeUpdate();
 			if(i == 1)
 				f = true;
@@ -53,8 +54,9 @@ public class MainDao implements UserInterface {
 	            String address = rs.getString("address");
 	            String userEmail = rs.getString("email");
 	            String userPassword = rs.getString("password");
+	            String userType = rs.getString("user_type");
 
-	            User user = new User(id, name, userEmail, phone, address, userPassword);
+	            User user = new User(id, name, userEmail, phone, address, userPassword,userType);
 	            System.out.println("User successfully logged in: " + userEmail);
 	            return user;
 	        } else {

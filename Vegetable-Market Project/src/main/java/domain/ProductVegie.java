@@ -7,6 +7,7 @@ public class ProductVegie {
 	private int price;
 	private String image_address;
 	private int quantity_kg;
+	private int vendorId;
 	
 	public ProductVegie() {}
 
@@ -56,6 +57,14 @@ public class ProductVegie {
 
 	public void setQuantity_kg(int quantity_kg) {
 		this.quantity_kg = quantity_kg;
+	}
+
+	public int getVendorId() {
+		return vendorId;
+	}
+
+	public void setVendorId(int vendorId) {
+		this.vendorId = vendorId;
 	}
 	
 	

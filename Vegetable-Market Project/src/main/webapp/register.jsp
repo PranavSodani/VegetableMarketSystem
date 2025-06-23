@@ -14,6 +14,14 @@
       margin-top: 4px;
       display: none;
     }
+    /* Optional: style for user type radio buttons */
+    .user-type-group {
+      margin-bottom: 15px;
+    }
+    .user-type-group label {
+      margin-right: 15px;
+      font-weight: normal;
+    }
   </style>
 </head>
 <body>
@@ -37,7 +45,6 @@
         <label for="email">Email Address</label>
         <input type="email" class="form-control" id="email" name="email" required>
       </div>
-      <!-- Add phone and address fields -->
       <div class="form-group">
         <label for="phone">Phone</label>
         <input type="text" class="form-control" id="phone" name="phone" required>
@@ -46,6 +53,16 @@
         <label for="address">Address</label>
         <input type="text" class="form-control" id="address" name="address" required>
       </div>
+      
+      <!-- User Type Selection -->
+      <div class="form-group user-type-group">
+        <label>User Type</label><br>
+        <input type="radio" id="user" name="userType" value="user" checked>
+        <label for="user">User</label>
+        <input type="radio" id="vendor" name="userType" value="vendor">
+        <label for="vendor">Vendor</label>
+      </div>
+      
       <div class="form-group">
         <label for="password">Password</label>
         <input type="password" class="form-control" id="password" name="password" required>

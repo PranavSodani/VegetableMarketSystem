@@ -7,18 +7,20 @@ public class User {
     private String phone;
     private String address;
     private String password;
+    private String userType;
 
     // Default constructor
     public User() {}
 
     // Constructor with all fields
-    public User(int user_id,String name, String email, String phone, String address, String password) {
+    public User(int user_id,String name, String email, String phone, String address, String password,String userType) {
         this.user_id = user_id;
     	this.name = name;
         this.email = email;
         this.phone = phone;
         this.address = address;
         this.password = password;
+        this.userType = userType;
     }
 
     // Getters and Setters
@@ -43,5 +45,13 @@ public class User {
 
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
+	}
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 }

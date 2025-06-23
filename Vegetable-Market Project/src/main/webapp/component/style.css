@@ -9,7 +9,7 @@ html, body {
 
 body {
   background-color: #f0f8f0;
-  background-image: url('assets/img/vegetable-bg.jpg');
+/*   background-image: url('../assets/img/market-logo.avif'); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -72,3 +72,13 @@ body {
 .forgot-password:hover, .register-link:hover {
   text-decoration: underline;
 }
+
+/* Optional styling for user type radio buttons */
+    .user-type-group {
+      margin: 15px 0;
+    }
+    .user-type-group label {
+      margin-right: 15px;
+      font-weight: normal;
+      cursor: pointer;
+    }

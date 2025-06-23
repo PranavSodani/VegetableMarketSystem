@@ -54,7 +54,7 @@
 				<%
 				if (loggedIn != null && loggedIn) {
 				%>
-				<a class="btn btn-danger" href="LogoutServlet">Logout</a>
+				<a class="btn btn-danger" href="<%= request.getContextPath() %>/LogoutServlet">Logout</a>
 				<%
 				} else {
 				%>

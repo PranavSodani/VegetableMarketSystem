@@ -21,6 +21,7 @@ public class RegisterServlet extends HttpServlet {
 		String phone = req.getParameter("phone");
 		String address = req.getParameter("address");
 		String password = req.getParameter("password");
+		String userType = req.getParameter("userType");
 		
 		User user = new User();
 		user.setName(name);
@@ -28,6 +29,7 @@ public class RegisterServlet extends HttpServlet {
 		user.setPhone(phone);
 		user.setAddress(address);
 		user.setPassword(password);
+		user.setUserType(userType);
 		
 		MainDefinition registerUser = new MainDefinition();
 		boolean isRegistered = registerUser.registerUser(user);
