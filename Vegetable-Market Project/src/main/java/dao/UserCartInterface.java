@@ -9,5 +9,5 @@ public interface UserCartInterface {
 	boolean addToCart(int cartId, int productId, int quantity, int quantityPerUnit);
 	List<CartItem> getCartItems(int cartId);
 	boolean deleteCartByItemId(int itemId);
-	boolean decreaseQuantity(int itemId);
+	boolean decreaseQuantity(int itemId,int quantity);
 }

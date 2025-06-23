@@ -53,9 +53,9 @@ public class MainDefinition implements MainInterface {
 		return obj2.deleteCartByItemId(itemId);
 	}
 
-	public boolean decreaseQuantity(int itemId) {
+	public boolean decreaseQuantity(int itemId,int quantity) {
 		// TODO Auto-generated method stub
-		return obj2.decreaseQuantity(itemId);
+		return obj2.decreaseQuantity(itemId,quantity);
 	}
 	
 

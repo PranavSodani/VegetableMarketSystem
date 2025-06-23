@@ -171,3 +171,22 @@
 .confirm-popup-button.confirm:hover {
     background: #c9302c;
 }
+.update-quantity-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.quantity-input {
+  width: 50px;
+  padding: 5px;
+  text-align: center;
+}
+.update-button {
+  padding: 5px 10px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+

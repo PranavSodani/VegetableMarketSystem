@@ -200,54 +200,30 @@ public class UserCartDao implements UserCartInterface{
 		}
 	}
 	
-	public boolean decreaseQuantity(int itemId) {
+	public boolean decreaseQuantity(int itemId, int quantity) {
 	    Connection conn = null;
-	    PreparedStatement stSelect = null;
-	    PreparedStatement stUpdate = null;
-	    PreparedStatement stDelete = null;
-	    ResultSet rs = null;
+	    PreparedStatement st = null;
 	    try {
 	        conn = DBConnect.getConn();
-
-	        // 1. Get current quantity
-	        String selectSql = "SELECT quantity FROM cart_items WHERE item_id = ?";
-	        stSelect = conn.prepareStatement(selectSql);
-	        stSelect.setInt(1, itemId);
-	        rs = stSelect.executeQuery();
-
-	        if (rs.next()) {
-	            int currentQuantity = rs.getInt("quantity");
-	            if (currentQuantity > 1) {
-	                // 2. Update quantity = quantity - 1
-	                String updateSql = "UPDATE cart_items SET quantity = ? WHERE item_id = ?";
-	                stUpdate = conn.prepareStatement(updateSql);
-	                stUpdate.setInt(1, currentQuantity - 1);
-	                stUpdate.setInt(2, itemId);
-	                int rows = stUpdate.executeUpdate();
-	                return rows > 0;
-	            } else {
-	                // 3. Quantity is 1, so remove the item
-	                String deleteSql = "DELETE FROM cart_items WHERE item_id = ?";
-	                stDelete = conn.prepareStatement(deleteSql);
-	                stDelete.setInt(1, itemId);
-	                int rows = stDelete.executeUpdate();
-	                return rows > 0;
-	            }
-	        }
-	        return false; // Item not found
+	        String sql = "UPDATE cart_items SET quantity = ? WHERE item_id = ?";
+	        st = conn.prepareStatement(sql);
+	        st.setInt(1, quantity);
+	        st.setInt(2, itemId);
+	        int rows = st.executeUpdate();
+	        return rows > 0;
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	        return false;
 	    } finally {
 	        try {
-	            DBConnect.closeResources(conn, rs, stSelect);
-	            if (stUpdate != null) stUpdate.close();
-	            if (stDelete != null) stDelete.close();
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
+				DBConnect.closeResources(conn, null, st);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	    }
 	}
+
 
 
 }
