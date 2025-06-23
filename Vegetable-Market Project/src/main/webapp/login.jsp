@@ -8,7 +8,8 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/component/style.css">
 </head>
 <body>
-  <div class="login-container">
+	<%@ include file="component/navbar.jsp"%>
+	<div class="login-container">
     <h2 class="login-header">
       <img src="assets/img/market-logo.avif" width="50" class="mr-2" alt="Market Logo">
       Login

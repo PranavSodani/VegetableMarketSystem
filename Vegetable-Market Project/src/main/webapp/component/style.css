@@ -1,5 +1,12 @@
 @charset "UTF-8";
 /* Ensures full page background and safe spacing for all content */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0 0 40px;  /* Removed top padding */
+  overflow-y: auto;
+}
+
 body {
   background-color: #f0f8f0;
   background-image: url('assets/img/vegetable-bg.jpg');
@@ -7,16 +14,12 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   min-height: 100vh;
-  padding: 0 0 40px;  /* Removed top padding */
   margin: 0;
-  overflow-y: auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
 }
 
-
-/* Ensures html tag also allows scrolling if form is very tall */
-html, body {
-  height: 100%;
-}
 
 /* Card styling for login and register forms */
 .login-container {
@@ -26,11 +29,11 @@ html, body {
   padding: 30px;
   width: 100%;
   max-width: 450px;
-  margin-top: 0;                /* Adjust if you want more space from top */
-  margin-bottom: 20px;
-  max-height: 90vh;             /* Optional: Limit height and enable scroll */
-  overflow-y: auto;             /* Optional: Enable scroll inside card */
+  max-height: 90vh;
+  overflow-y: auto;
+  margin: 70px auto 0;  /* <-- This centers and pushes down */
 }
+
 
 /* Header styling */
 .login-header {
