@@ -6,8 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Vegetable Market</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/component/notification.css">
 </head>
 <body>
+	<%
+	Integer cartItemCount = (Integer) session.getAttribute("cartItemCount");
+	if (cartItemCount == null)
+		cartItemCount = 0;
+	%>
+
 	<nav class="navbar navbar-expand-lg navbar-light bg-success sticky-top">
 		<div class="container">
 			<!-- Logo and Brand -->
@@ -63,8 +71,12 @@
 			%>
 			<!-- Cart button (optional) -->
 			<div class="ml-2">
-				<a class="btn btn-warning text-dark" href="viewCart"> <i class="fas fa-shopping-cart"></i> Cart </a>
+				<a class="btn btn-warning text-dark" href="viewCart"> <i
+					class="fas fa-shopping-cart"></i> <span
+					class="badge badge-danger cart-badge"><%=cartItemCount%></span>
+				</a>
 			</div>
+
 			<%
 			}
 			%>

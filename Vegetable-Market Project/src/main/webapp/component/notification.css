@@ -1,0 +1,11 @@
+@charset "UTF-8";
+ .cart-badge { 
+   position: relative; 
+   top: -10px; 
+   left: -8px; 
+   background: #dc3545; 
+   color: white; 
+   border-radius: 50%; 
+   font-size: 12px; 
+   padding: 2px 6px; 
+ }
