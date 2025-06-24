@@ -14,27 +14,28 @@ import util.DBConnect;
 
 public class MainDao implements UserInterface {
 	public boolean registerUserDao(User user) {
-		boolean f = false;
-		try {	
-			Connection conn = DBConnect.getConn();
-			String sql= "insert into users(name,email,phone,address,password,user_type) values (?,?,?,?,?,?)";
-			PreparedStatement st = conn.prepareStatement(sql);
-			System.out.println(user.getName());
-			st.setString(1,user.getName());
-			st.setString(2,user.getEmail()	);
-			st.setString(3, user.getPhone());
-			st.setString(4, user.getAddress());
-			st.setString(5, user.getPassword());
-			st.setString(6, user.getUserType());
-			int i = st.executeUpdate();
-			if(i == 1)
-				f = true;
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		return f;
+	    boolean f = false;
+	    try {    
+	        Connection conn = DBConnect.getConn();
+	        String sql= "insert into users(name,email,phone,address,password,user_type,profile_image) values (?,?,?,?,?,?,?)";
+	        PreparedStatement st = conn.prepareStatement(sql);
+	        st.setString(1, user.getName());
+	        st.setString(2, user.getEmail());
+	        st.setString(3, user.getPhone());
+	        st.setString(4, user.getAddress());
+	        st.setString(5, user.getPassword());
+	        st.setString(6, user.getUserType());
+	        st.setString(7, user.getProfileImage() != null ? user.getProfileImage() : ""); // or NULL
+	        int i = st.executeUpdate();
+	        if(i == 1)
+	            f = true;
+	    }
+	    catch(Exception e) {
+	        e.printStackTrace();
+	    }
+	    return f;
 	}
+
 
 	public User loginUserDao(String email, String password) {
 	    Connection conn = null;
@@ -55,8 +56,9 @@ public class MainDao implements UserInterface {
 	            String userEmail = rs.getString("email");
 	            String userPassword = rs.getString("password");
 	            String userType = rs.getString("user_type");
+	            String profileImage = rs.getString("profile_image"); // New
 
-	            User user = new User(id, name, userEmail, phone, address, userPassword,userType);
+	            User user = new User(id, name, userEmail, phone, address, userPassword, userType, profileImage);
 	            System.out.println("User successfully logged in: " + userEmail);
 	            return user;
 	        } else {
@@ -75,6 +77,7 @@ public class MainDao implements UserInterface {
 	        }
 	    }
 	}
+
 
 	
 	public List<ProductVegie> getAllProducts(){
@@ -100,5 +103,33 @@ public class MainDao implements UserInterface {
 	    }
 	    return products;
 	}
+	
+	public boolean updateProfileImage(int userId, String profileImage) {
+	    boolean updated = false;
+	    Connection conn = null;
+	    PreparedStatement st = null;
+	    String sql = "UPDATE users SET profile_image = ? WHERE user_id = ?";
+	    try {
+	        conn = DBConnect.getConn();
+	        st = conn.prepareStatement(sql);
+	        st.setString(1, profileImage);
+	        st.setInt(2, userId);
+	        int i = st.executeUpdate();
+	        if (i == 1) {
+	            updated = true;
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (st != null) st.close();
+	            if (conn != null) conn.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    return updated;
+	}
+
 	
 }

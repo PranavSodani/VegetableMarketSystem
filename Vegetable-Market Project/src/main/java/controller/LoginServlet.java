@@ -32,12 +32,13 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("loggedIn", true);
                 session.setAttribute("user_id", user.getUser_id());
                 session.setAttribute("userType", user.getUserType()); // Store user type in session
+                session.setAttribute("user", user);
 
                 // Redirect based on userType
                 if ("vendor".equalsIgnoreCase(user.getUserType())) {
                     resp.sendRedirect("vendor/products/list");  // Vendor dashboard servlet URL
                 } else {
-                    resp.sendRedirect("products.jsp");  // User dashboard JSP page
+                    resp.sendRedirect("index.jsp");  // User dashboard JSP page
                 }
             } else {
                 session.setAttribute("errorMessage", "User type does not match. Please select the correct user type.");

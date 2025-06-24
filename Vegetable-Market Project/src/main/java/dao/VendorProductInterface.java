@@ -11,4 +11,5 @@ public interface VendorProductInterface {
     public void deleteProduct(int productId, int vendorId);
     ProductVegie getProductById(int productId);
 	List<ProductVegie> getProductsByVendorId(int vendorId); 
+	
 }
