@@ -10,41 +10,6 @@
   <title>My Products</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/component/style.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/component/vendor.css">
-  <style>
-    .btn-add {
-      margin-top: 20px;
-      margin-bottom: 20px;
-      background-color: #6c8cff;
-      padding: 12px 24px;
-      color: white;
-      font-weight: bold;
-      border-radius: 8px;
-      text-decoration: none;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: background-color 0.3s ease;
-    }
-    .btn-add:hover {
-      background-color: #8da6ff;
-      color: white;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    }
-    .table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    .table th, .table td {
-      padding: 12px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
-    .table th {
-      background-color: #f2f2f2;
-    }
-    .table tr:hover {
-      background-color: #f9f9f9;
-    }
-  </style>
 </head>
 <body>
   <%@ include file="component/navbar.jsp" %>
