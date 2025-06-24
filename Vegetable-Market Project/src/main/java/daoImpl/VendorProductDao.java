@@ -35,9 +35,22 @@ public class VendorProductDao implements VendorProductInterface {
 
 	@Override
 	public void insertProduct(ProductVegie product, int vendorId) {
-		// TODO Auto-generated method stub
-		
+	    String sql = "INSERT INTO products_vegies (name, description, price, quantity_kg, image_address, vendor_id) VALUES (?, ?, ?, ?, ?, ?)";
+	    try (Connection conn = DBConnect.getConn();
+	         PreparedStatement st = conn.prepareStatement(sql)) {
+	        st.setString(1, product.getName());
+	        st.setString(2, product.getDescription());
+	        st.setInt(3, product.getPrice());
+	        st.setInt(4, product.getQuantity_kg());
+	        st.setString(5, product.getImage_address());
+	        st.setInt(6, vendorId);
+	        System.out.println(product.getImage_address());
+	        st.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
+
 
 	@Override
 	public void updateProduct(ProductVegie product) {

@@ -82,6 +82,11 @@
 			<location>C:/Users/PRANAV/Desktop/bhindi.jfif</location>
 		</link>
 		<link>
+			<name>src/main/webapp/assets/vegetables/brinjal.jfif</name>
+			<type>1</type>
+			<location>C:/Users/PRANAV/Desktop/brinjal.jfif</location>
+		</link>
+		<link>
 			<name>src/main/webapp/assets/vegetables/carrot.jfif</name>
 			<type>1</type>
 			<location>C:/Users/PRANAV/Desktop/carrot.jfif</location>

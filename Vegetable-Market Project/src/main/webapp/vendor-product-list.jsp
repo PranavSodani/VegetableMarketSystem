@@ -50,7 +50,7 @@
   <%@ include file="component/navbar.jsp" %>
   <div class="container">
     <h2>My Products</h2>
-    <a href="new" class="btn btn-add">Add New Product</a>
+    <a href="${pageContext.request.contextPath}/vendor/products/new" class="btn btn-add">Add New Product</a>
     <table class="table">
       <thead>
         <tr>
