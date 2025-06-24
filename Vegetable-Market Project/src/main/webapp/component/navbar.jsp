@@ -15,15 +15,13 @@
 	if (cartItemCount == null)
 		cartItemCount = 0;
 	%>
-
 	<nav class="navbar navbar-expand-lg navbar-light bg-success sticky-top">
 		<div class="container">
 			<!-- Logo and Brand -->
 			<a class="navbar-brand d-flex align-items-center" href="index.jsp">
-				<img src="assets/img/market-logo.avif" width="50"
-				alt="Vegetable Market" class="mr-2"> <span
+				<img src="<%= request.getContextPath() %>/assets/img/market-logo.avif" width="50" alt="Vegetable Market" class="mr-2"><span
 				class="text-white font-weight-bold">Veggie Market</span>
-			</a>
+			</a>	
 
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarNav" aria-controls="navbarNav"

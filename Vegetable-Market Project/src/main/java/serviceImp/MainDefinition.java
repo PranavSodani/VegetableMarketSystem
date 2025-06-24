@@ -4,6 +4,7 @@ import java.util.List;
 
 import daoImpl.MainDao;
 import daoImpl.UserCartDao;
+import daoImpl.VendorProductDao;
 import domain.CartItem;
 import domain.CartItemWithProduct;
 import domain.ProductVegie;
@@ -13,7 +14,7 @@ import service.MainInterface;
 public class MainDefinition implements MainInterface {
 	MainDao obj1 = new MainDao();
 	UserCartDao obj2 = new UserCartDao();
-	
+	VendorProductDao obj3 = new VendorProductDao();
 	public User loginUser(String email,String password) {
 		return obj1.loginUserDao(email,password);
 	}
@@ -56,6 +57,11 @@ public class MainDefinition implements MainInterface {
 	public boolean decreaseQuantity(int itemId,int quantity) {
 		// TODO Auto-generated method stub
 		return obj2.decreaseQuantity(itemId,quantity);
+	}
+
+	public List<ProductVegie> getProductsByVendorId(int userId) {
+		// TODO Auto-generated method stub
+		return obj3.getProductsByVendor(userId);
 	}
 	
 

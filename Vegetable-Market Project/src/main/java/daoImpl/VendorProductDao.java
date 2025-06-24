@@ -57,4 +57,28 @@ public class VendorProductDao implements VendorProductInterface {
 		return null;
 	}
 
+	@Override
+	public List<ProductVegie> getProductsByVendorId(int vendorId) {
+	    List<ProductVegie> products = new ArrayList<>();
+	    try (Connection conn = DBConnect.getConn()) { // Get your DB connection
+	        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM products_vegies WHERE vendor_id = ?");
+	        stmt.setInt(1, vendorId);
+	        ResultSet rs = stmt.executeQuery();
+	        while (rs.next()) {
+	            ProductVegie product = new ProductVegie();
+	            product.setId(rs.getInt("id"));
+	            product.setName(rs.getString("name"));
+	            product.setDescription(rs.getString("description"));
+	            product.setPrice(rs.getInt("price"));
+	            product.setQuantity_kg(rs.getInt("quantity_kg"));
+	            product.setImage_address(rs.getString("image_address"));
+	            products.add(product);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return products;
+	}
+
+
 }
