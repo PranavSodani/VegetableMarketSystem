@@ -92,3 +92,28 @@ body {
     padding: 20px 25px;
   }
 }
+
+.container table td a {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 0 3px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .container table td a:first-child {
+    background-color: #4a90e2;
+    color: white;
+  }
+  .container table td a:first-child:hover {
+    background-color: #357ABD;
+  }
+  .container table td a:last-child {
+    background-color: #e74c3c;
+    color: white;
+  }
+  .container table td a:last-child:hover {
+    background-color: #c0392b;
+  }

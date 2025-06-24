@@ -8,7 +8,7 @@ public interface VendorProductInterface {
 	List<ProductVegie> getProductsByVendor(int vendorId);
     void insertProduct(ProductVegie product, int vendorId);
     void updateProduct(ProductVegie product);
-    void deleteProduct(int productId);
+    public void deleteProduct(int productId, int vendorId);
     ProductVegie getProductById(int productId);
-	List<ProductVegie> getProductsByVendorId(int vendorId);
+	List<ProductVegie> getProductsByVendorId(int vendorId); 
 }

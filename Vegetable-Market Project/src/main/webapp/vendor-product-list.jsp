@@ -10,6 +10,7 @@
   <title>My Products</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/component/style.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/component/vendor.css">
+ 
 </head>
 <body>
   <%@ include file="component/navbar.jsp" %>
@@ -42,8 +43,9 @@
             <td><%= product.getQuantity_kg() %></td>
             <td><img src="${pageContext.request.contextPath}/<%= product.getImage_address() %>" width="50"></td>
             <td>
-              <a href="edit?id=<%= product.getId() %>">Edit</a>
-              <a href="delete?id=<%= product.getId() %>">Delete</a>
+              <a href="${pageContext.request.contextPath}/vendor/products/edit?id=<%= product.getId() %>">Edit</a>
+			  <a href="${pageContext.request.contextPath}/vendor/products/delete?id=<%= product.getId() %>" onclick="return confirm('Are you sure you want to delete this product?');">Delete</a>
+
             </td>
           </tr>
         <%

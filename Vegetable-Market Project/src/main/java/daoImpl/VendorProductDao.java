@@ -52,23 +52,43 @@ public class VendorProductDao implements VendorProductInterface {
 	}
 
 
-	@Override
-	public void updateProduct(ProductVegie product) {
-		// TODO Auto-generated method stub
-		
+	public void deleteProduct(int productId, int vendorId) {
+	    String sql = "DELETE FROM products_vegies WHERE id = ? AND vendor_id = ?";
+	    try (Connection conn = DBConnect.getConn();
+	         PreparedStatement st = conn.prepareStatement(sql)) {
+	        st.setInt(1, productId);
+	        st.setInt(2, vendorId);
+	        st.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
 
-	@Override
-	public void deleteProduct(int productId) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public ProductVegie getProductById(int productId) {
-		// TODO Auto-generated method stub
-		return null;
+	    ProductVegie product = null;
+	    String sql = "SELECT * FROM products_vegies WHERE id = ?";
+	    try (Connection conn = DBConnect.getConn();
+	         PreparedStatement st = conn.prepareStatement(sql)) {
+	        st.setInt(1, productId);
+	        ResultSet rs = st.executeQuery();
+	        if (rs.next()) {
+	            product = new ProductVegie();
+	            product.setId(rs.getInt("id"));
+	            product.setName(rs.getString("name"));
+	            product.setDescription(rs.getString("description"));
+	            product.setPrice(rs.getInt("price"));
+	            product.setQuantity_kg(rs.getInt("quantity_kg"));
+	            product.setImage_address(rs.getString("image_address"));
+	            product.setVendorId(rs.getInt("vendor_id"));
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return product;
 	}
+
 
 	@Override
 	public List<ProductVegie> getProductsByVendorId(int vendorId) {
@@ -91,6 +111,24 @@ public class VendorProductDao implements VendorProductInterface {
 	        e.printStackTrace();
 	    }
 	    return products;
+	}
+	
+	@Override
+	public void updateProduct(ProductVegie product) {
+	    String sql = "UPDATE products_vegies SET name = ?, description = ?, price = ?, quantity_kg = ?, image_address = ? WHERE id = ? AND vendor_id = ?";
+	    try (Connection conn = DBConnect.getConn();
+	         PreparedStatement st = conn.prepareStatement(sql)) {
+	        st.setString(1, product.getName());
+	        st.setString(2, product.getDescription());
+	        st.setInt(3, product.getPrice());
+	        st.setInt(4, product.getQuantity_kg());
+	        st.setString(5, product.getImage_address());
+	        st.setInt(6, product.getId());
+	        st.setInt(7, product.getVendorId());
+	        st.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
 
 
