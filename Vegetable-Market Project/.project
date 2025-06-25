@@ -57,6 +57,11 @@
 			<location>C:/Users/PRANAV/Desktop/contact-us.avif</location>
 		</link>
 		<link>
+			<name>src/main/webapp/assets/img/default-profile-image.webp</name>
+			<type>1</type>
+			<location>C:/Users/PRANAV/Desktop/default-profile-image.webp</location>
+		</link>
+		<link>
 			<name>src/main/webapp/assets/img/market-logo.avif</name>
 			<type>1</type>
 			<location>C:/Users/PRANAV/Desktop/market-logo.avif</location>

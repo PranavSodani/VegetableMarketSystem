@@ -1,0 +1,129 @@
+use example1;
+create table Student (
+	user_id int,
+    username varchar(50)
+);
+insert into Student(user_id,username) values
+(12,'Pranav'),
+(13,'Rajas');
+select * from Student;
+select * from fruits;
+drop table ContactManager;
+create table ContactManager (
+	user_id int AUTO_INCREMENT PRIMARY KEY,
+    username varchar(50),
+    phonenumber varchar(50),
+    email varchar(50)
+);
+insert into ContactManager(user_id,username,phonenumber,email) values
+(1,'Pranav','1234567890','abc@gmail.com');
+select * from ContactManager;
+
+create table login(uname varchar(20),pass varchar(20));
+insert into login values("pranav","123");
+insert into login values("raj","raj");
+
+select * from login;		
+
+
+
+
+create database neon;
+use neon;
+show tables; 
+select * from user;
+describe user;
+select * from contact;
+select * from alien;
+
+
+create database vegetables;
+use vegetables;
+CREATE TABLE users (
+  user_id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL UNIQUE,
+  phone VARCHAR(20) NOT NULL,
+  address TEXT NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+ALTER TABLE users ADD COLUMN user_type VARCHAR(20) NOT NULL DEFAULT 'user';
+ALTER TABLE users ADD COLUMN profile_image VARCHAR(255);
+
+describe table users;
+select * from users;	
+
+CREATE TABLE products_vegies (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  description TEXT,
+  price DECIMAL(10,2) NOT NULL,
+  image_address VARCHAR(255) NOT NULL
+);
+ALTER TABLE products_vegies
+ADD COLUMN quantity_kg INT DEFAULT 0;
+ALTER TABLE products_vegies
+ADD COLUMN vendor_id INT NOT NULL;
+
+
+INSERT INTO products_vegies (name, price, description, image_address)
+VALUES ('Onion', 30, 'Crisp, flavorful onions', 'assets/vegetables/onion.jfif');
+
+INSERT INTO products_vegies (name, price, description, image_address)
+VALUES ('Bhindi', 40, 'Fresh bhindi (okra)', 'assets/vegetables/bhindi.jfif');
+
+INSERT INTO products_vegies (name, price, description, image_address)
+VALUES ('Carrot', 20, 'Sweet and crunchy carrots', 'assets/vegetables/carrot.jfif');
+
+INSERT INTO products_vegies (name, price, description, image_address)
+VALUES ('Potato', 25, 'Versatile and hearty potatoes', 'assets/vegetables/potato.jfif');
+
+INSERT INTO products_vegies (name, price, description, image_address)
+VALUES ('Tomato', 30, 'Juicy and ripe tomatoes', 'assets/vegetables/tomato.jpg');
+
+INSERT INTO products_vegies (name,price,description,image_address)
+VALUES ('Coriander',15,'Green and Fresh','assets/vegetables/coriander.jfif');
+
+UPDATE products_vegies SET quantity_kg = 50 WHERE name = 'Onion';
+UPDATE products_vegies SET quantity_kg = 30 WHERE name = 'Bhindi';
+UPDATE products_vegies SET quantity_kg = 40 WHERE name = 'Carrot';
+UPDATE products_vegies SET quantity_kg = 60 WHERE name = 'Potato';
+UPDATE products_vegies SET quantity_kg = 25 WHERE name = 'Tomato';
+UPDATE products_vegies SET quantity_kg = 15 WHERE name = 'Coriander';
+
+select * from products_vegies;
+
+UPDATE products_vegies
+SET vendor_id = 12;
+ 	
+
+CREATE TABLE user_cart (
+    cart_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_active BOOLEAN DEFAULT TRUE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+select* from user_cart;
+CREATE TABLE cart_items (
+    item_id INT AUTO_INCREMENT PRIMARY KEY,
+    cart_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    quantity_per_unit INT NOT NULL,
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (cart_id) REFERENCES user_cart(cart_id),
+    FOREIGN KEY (product_id) REFERENCES products_vegies(id)
+);
+select * from cart_items;	
+
+
+
+
+
+
+
+
+
+
