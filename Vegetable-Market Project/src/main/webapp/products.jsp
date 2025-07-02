@@ -2,12 +2,42 @@
     pageEncoding="UTF-8"%>
 <%@ page import="domain.ProductVegie"%>
 <%@ page import="java.util.List"%>
+<%@ page import="java.util.Map"%>
+
+<%
+    // Defensive: Always initialize variables to avoid nulls in JSP/JS
+    List<String> productNames = (List<String>) request.getAttribute("productNames");
+    if (productNames == null) productNames = new java.util.ArrayList<>();
+
+    Map<String, String> synonymToProduct = (Map<String, String>) request.getAttribute("synonymToProduct");
+    if (synonymToProduct == null) synonymToProduct = new java.util.HashMap<>();
+%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Product Card</title>
+
+<!-- Output productNames and synonymToProduct as JS variables -->
+<script>
+const productNames = [
+    <% for (int i = 0; i < productNames.size(); i++) { %>
+        "<%= productNames.get(i).replace("\"", "\\\"") %>"<%= (i < productNames.size() - 1) ? "," : "" %>
+    <% } %>
+];
+
+const synonymToProduct = {
+    <% 
+    int count = 0;
+    int size = synonymToProduct.size();
+    for (Map.Entry<String, String> entry : synonymToProduct.entrySet()) { %>
+        "<%= entry.getKey().replace("\"", "\\\"") %>": "<%= entry.getValue().replace("\"", "\\\"") %>"<%= (++count < size) ? "," : "" %>
+    <% } %>
+};
+console.log("productNames:", productNames);
+console.log("synonymToProduct:", synonymToProduct);
+</script>
 
 <script src="${pageContext.request.contextPath}/script/product-card.js"></script>
 <script src="${pageContext.request.contextPath}/script/search-functionality.js"></script>
@@ -16,7 +46,6 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/component/vegetable-card.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/component/cart-card.css">
-
 </head>
 <body>
     <%@ include file="component/navbar.jsp"%>
@@ -58,12 +87,12 @@
                     <option value="1000">1000gm</option>
                 </select>
 
-                <button type="button" class="card-buy-button" data-product-id="<%=product.getId()%>">Add to Cart</button>
-
+                <button type="button" class="card-buy-button"
+                    data-product-id="<%=product.getId()%>">Add to Cart</button>
             </div>
         </div>
         <%
-            }
+        }
         } else {
         %>
         <p>No products available.</p>
@@ -82,7 +111,5 @@
     <div id="cart-notification" class="cart-notification">
         <span>Your item has been added to the cart successfully!</span>
     </div>
-    
-    
 </body>
 </html>
