@@ -25,9 +25,6 @@ insert into login values("raj","raj");
 
 select * from login;		
 
-
-
-
 create database neon;
 use neon;
 show tables; 
@@ -92,7 +89,7 @@ UPDATE products_vegies SET quantity_kg = 60 WHERE name = 'Potato';
 UPDATE products_vegies SET quantity_kg = 25 WHERE name = 'Tomato';
 UPDATE products_vegies SET quantity_kg = 15 WHERE name = 'Coriander';
 
-select * from products_vegies;
+select * from products_vegies;	
 
 UPDATE products_vegies
 SET vendor_id = 12;
@@ -118,12 +115,22 @@ CREATE TABLE cart_items (
 );
 select * from cart_items;	
 
+CREATE TABLE product_synonyms (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  product_id INT NOT NULL,
+  synonym VARCHAR(100) NOT NULL,
+  FOREIGN KEY (product_id) REFERENCES products_vegies(id)
+);
 
-
-
-
-
-
-
-
-
+INSERT INTO product_synonyms (product_id, synonym) VALUES
+(2, 'ladyfinger'),
+(2, 'okra'),
+(11, 'karela'),
+(12, 'karela'),
+(13, 'gobhi'),
+(14, 'gobhi'),
+(6, 'dhania'),
+(9, 'eggplant'),
+(15, 'green beans'),
+(15, 'french beans');
+select * from product_synonyms;
