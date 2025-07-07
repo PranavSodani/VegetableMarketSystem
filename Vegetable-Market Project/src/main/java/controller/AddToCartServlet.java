@@ -62,6 +62,7 @@ public class AddToCartServlet extends HttpServlet {
 
         // Store total count in session
         session.setAttribute("cartItemCount", totalCount);
-        resp.sendRedirect("products.jsp");
+        resp.sendRedirect("http://localhost:8080/Vegetable-Market_Project/products");
+
     }
 }

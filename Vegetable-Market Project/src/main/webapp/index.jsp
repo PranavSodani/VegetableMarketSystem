@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/component/style2.css">
   
 </head>
-<body>
+<body> 
   <%@ include file="component/navbar.jsp" %>
 
   <!-- Hero Section with Image -->
