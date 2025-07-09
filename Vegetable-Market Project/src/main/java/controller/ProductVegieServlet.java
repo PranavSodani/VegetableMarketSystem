@@ -62,5 +62,6 @@ public class ProductVegieServlet extends HttpServlet {
         req.setAttribute("synonymToProduct", synonymToProduct);
 
         req.getRequestDispatcher("/products.jsp").forward(req, resp);
+        
     }
 }
