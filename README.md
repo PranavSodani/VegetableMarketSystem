@@ -41,5 +41,32 @@ Project Explanation =
   - Save the file to a folder on the server using part.write("path").
   - Get the file name using a helper method.
  
+* AuthFilter.java - 
+  - in this in the @WebFilter() we pass all the links of the pages where we want it to be applied and then it checks by fetching the session and and checking whether it contians the required attribute or not .
+    then it redirects accordingly.
+
+
+									PROJECT STRUCTURE
+
+Q Why do we keep two interfaces ? 
+  Mainly the interfaces are present their for abstraction purposes.It helps us to change the implementation easily. Also it helps in keeping the code loosely coupled.
+  Dao Interface - helps in hiding the CRUD of the data.
+  Service Interface - helps in hiding the bussiness logics like user registration.
+
+
+Controller - contains servlet and classes that handle HTTP requests and responses.
+dao - contains interfaces for DAO. specifies database operation methods.
+daoImp - actual database logic is present here.
+service - contains interfaces for buissness logic.
+serviceImp - contains implementation of methods in service interface
+exception - contains custom exception for handling specific application-errors
+domain - Contains POJO or data models 
+util - contians helper classes.
+
+ 
+
+
+
+
 
 	
